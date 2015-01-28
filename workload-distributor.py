@@ -37,20 +37,24 @@ def poll():
     logging.info('Received a request from %s', bottle.request.remote_addr)
     try:
         if is_distribution_enabled():
-            command = 'python2 /home/ubuntu/cpu-load-generator/cpu-load-generator.py -n 1 300 ' + \
-                      '/home/ubuntu/spe-2012-experiments/{0}/{1}'.format(dir, files.pop())
+            exec_path = 'python2 /home/ubuntu/git/cpu-load-generator/cpu-load-generator.py'
+            trace_path = '/home/ubuntu/git/ccpe-2014-experiments/{0}/{1}'.format(dir, files.pop())
+
+            command = (exec_path + ' -n ' + str(ncpus) + ' ' + str(interval) + ' ' + trace_path)
             logging.info('Returning: %s', command)
             return command
     except:
         logging.exception('Exception during request processing:')
         raise
 
-
 if len(sys.argv) < 2:
     print 'You must specify an argument: a directory containing workload trace files'
     sys.exit(1)
 
 dir = sys.argv[1]
+ncpus = sys.argv[2] if len(sys.argv) > 2 else 0 #autodetect
+interval = sys.argv[3] if len(sys.argv) > 3 else 300
+
 files = os.listdir(dir)
 
 logging.info('Starting listening on localhost:8081')
