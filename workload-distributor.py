@@ -40,7 +40,8 @@ def poll():
             exec_path = 'python2 /home/ubuntu/git/cpu-load-generator/cpu-load-generator.py'
             trace_path = '/home/ubuntu/git/ccpe-2014-experiments/{0}/{1}'.format(dir, files.pop())
 
-            command = (exec_path + ' -n ' + str(ncpus) + ' ' + str(interval) + ' ' + trace_path)
+            command = (exec_path + ' -n ' + str(ncpus) + ' -m' + str(mem_util) + ' ' +
+                                    str(interval) + ' ' + trace_path)
             logging.info('Returning: %s', command)
             return command
     except:
@@ -54,6 +55,7 @@ if len(sys.argv) < 2:
 dir = sys.argv[1]
 ncpus = sys.argv[2] if len(sys.argv) > 2 else 0 #autodetect
 interval = sys.argv[3] if len(sys.argv) > 3 else 300
+mem_util = sys.argv[4] if len(sys.argv) > 4 else 0
 
 files = os.listdir(dir)
 
