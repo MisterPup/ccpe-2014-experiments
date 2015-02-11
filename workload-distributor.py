@@ -55,7 +55,7 @@ if len(sys.argv) < 2:
 dir = sys.argv[1]
 ncpus = sys.argv[2] if len(sys.argv) > 2 else 0 #autodetect
 interval = sys.argv[3] if len(sys.argv) > 3 else 300
-mem_util = sys.argv[4] if len(sys.argv) > 4 else 0
+mem_util = sys.argv[4] if len(sys.argv) > 4 else 85
 
 files = os.listdir(dir)
 
