@@ -14,7 +14,7 @@
 
 import logging
 logging.basicConfig(
-    filename='workload-distributor.log',
+    filename='/home/ubuntu/git/ccpe-2014-experiments/workload-distributor.log',
     format='%(asctime)s %(levelname)-8s %(message)s',
     level=logging.DEBUG)
 
@@ -37,7 +37,7 @@ def poll():
     logging.info('Received a request from %s', bottle.request.remote_addr)
     try:
         if is_distribution_enabled():
-            exec_path = 'python2 /home/ubuntu/git/cpu-load-generator/cpu-load-generator.py'
+            exec_path = '/usr/bin/python2 /home/ubuntu/git/cpu-load-generator/cpu-load-generator.py'
             trace_path = '/home/ubuntu/git/ccpe-2014-experiments/{0}/{1}'.format(dir, files.pop())
 
             command = (exec_path + ' -n ' + str(ncpus) + ' -m' + str(mem_util) + ' ' +
